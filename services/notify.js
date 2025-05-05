@@ -89,15 +89,15 @@ async function sendNotifications(client) {
 
 function startScheduler(client) {
     // For debugging: check every minute
-    setInterval(() => {
-        sendNotifications(client).catch(console.error);
-    }, 60 * 1000);
+    // setInterval(() => {
+    //     sendNotifications(client).catch(console.error);
+    // }, 60 * 1000);
 
     // For production: check at midnight
-    // const schedule = require('node-schedule');
-    // schedule.scheduleJob('0 0 * * *', () => {
-    //     sendNotifications(client).catch(console.error);
-    // });
+    const schedule = require('node-schedule');
+    schedule.scheduleJob('0 0 * * *', () => {
+        sendNotifications(client).catch(console.error);
+    });
 }
 
 module.exports = { startScheduler };
